@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:rabbitmq="http://www.core.cn/schema/rabbitmq"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd 
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+		http://www.core.cn/schema/rabbitmq http://www.core.cn/schema/rabbitmq/spring-rabbitmq.xsd"
+	default-lazy-init="true">
+	
+	<!-- import -->
+	<import resource="classpath*:/java-store-web-springmvc-server-import.xml" />
+	
+	<context:annotation-config />
+	<context:component-scan base-package="com.java"/>
+	
+	<bean id="java-store-web-springmvc-service.properties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="location">
+			<value>classpath:java-store-web-springmvc-service.properties</value>
+		</property>
+	</bean>
+	
+<!-- 	<dubbo:application name="nzp-jxhd-homework-server" />
+	<dubbo:registry file="nzp-jxhd-homework-server.registry" />
+	<dubbo:protocol name="dubbo" port="${dubbo.port.nzp-jxhd-homework-server}" />
+	<dubbo:protocol name="rest" server="servlet" port="${dubbo.rest.port.nzp-jxhd-homework-server}" contextpath="nzp-jxhd-homework-server/rest" extension="com.alibaba.dubbo.rpc.protocol.rest.support.LoggingFilter,cn.nzp.jxhd.homework.server.common.MyValidationExceptionMapper" />
+	
+	
+	<dubbo:service interface="cn.nzp.jxhd.homework.client.JxhdHomeworkService" ref="jxhdHomeworkServiceImpl" validation="true" />
+	<dubbo:service interface="cn.nzp.jxhd.homework.client.JxhdHomeworkCheckService" ref="jxhdHomeworkCheckServiceImpl" validation="true"/>
+	<dubbo:service interface="cn.nzp.jxhd.homework.client.JxhdHomeworkStatisService" ref="jxhdHomeworkStatisServiceImpl" validation="true"/>
+
+	消息队列
+	<rabbitmq:client id="homeworkAddmqService" serviceInterface="cn.nzp.jxhd.homework.server.mq.HomeworkAddmqService" />    
+	<rabbitmq:endpoint id="homeworkAddmqServiceHW" serviceInterface="cn.nzp.jxhd.homework.server.mq.HomeworkAddmqService" implementor="homeworkAddmqServiceImpl" />
+ -->
+
+</beans>

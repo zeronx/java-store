@@ -1,0 +1,14 @@
+../nzp-external-parent
+../nzp-external-datasync/nzp-external-datasync-dispatcher/nzp-external-datasync-dispatcher-client
+../nzp-external-datasync/nzp-external-datasync-dispatcher/nzp-external-datasync-dispatcher-persistence
+../nzp-external-ifservice/nzp-external-ifservice-agent/nzp-external-ifservice-agent-email
+../nzp-external-ifservice/nzp-external-ifservice-agent/nzp-external-ifservice-agent-geo
+../nzp-external-pakq/nzp-external-pakq-client
+../nzp-external-bdm/nzp-external-bdm-dto
+../nzp-external-bdm/nzp-external-bdm-client
+../nzp-external-bdm/nzp-external-bdm-persistence
+../nzp-external-bdm/nzp-external-bdm-provider
+../nzp-external-bdm/nzp-external-bdm-provider-ys
+../nzp-external-bdm/nzp-external-bdm-provider-yxtnl
+../nzp-external-si/nzp-external-si-client
+../nzp-external-si/nzp-external-si-persistence
