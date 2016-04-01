@@ -16,8 +16,9 @@
 	<import resource="classpath*:/java-store-web-oauth-server-import.xml" />
 	
 	<context:annotation-config />
-	<context:component-scan base-package="com.java"/>
-	
+	<context:component-scan base-package="com.java">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 	<bean id="java-store-web-oauth-service.properties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
 		<property name="location">

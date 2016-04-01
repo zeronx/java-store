@@ -48,7 +48,6 @@ public class AccessTokenController {
         try {
             //构建OAuth请求
             OAuthTokenRequest oauthRequest = new OAuthTokenRequest(request);
-
 //            //检查提交的客户端id是否正确
 //            if (!oAuthService.checkClientId(oauthRequest.getClientId())) {
 //                OAuthResponse response =
@@ -87,14 +86,12 @@ public class AccessTokenController {
             final String accessToken = oauthIssuerImpl.accessToken();
 //            oAuthService.addAccessToken(accessToken, oAuthService.getUsernameByAuthCode(authCode));
 
-
             //生成OAuth响应
             OAuthResponse response = OAuthASResponse
                     .tokenResponse(HttpServletResponse.SC_OK)
                     .setAccessToken(accessToken)
                     .setExpiresIn(String.valueOf("36000"))///oAuthService.getExpireIn()
                     .buildJSONMessage();
-
             //根据OAuthResponse生成ResponseEntity
             return new ResponseEntity(response.getBody(), HttpStatus.valueOf(response.getResponseStatus()));
 

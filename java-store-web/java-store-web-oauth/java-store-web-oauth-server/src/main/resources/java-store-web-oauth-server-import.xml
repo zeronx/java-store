@@ -13,8 +13,8 @@
 	<import resource="classpath*:/mp-eoa-client.xml" />
 	<import resource="classpath*:/nzp-core-common-cache.xml" />
 	<import resource="classpath*:/nzp-jxhd-points-client.xml" />
-	异步
-	<import resource="classpath*:/core-common-mq-client.xml" />
-	<import resource="classpath*:/core-common-mq-server.xml" /> -->
+	异步 -->
+	<import resource="classpath*:/java-store-web-oauth-shiro.xml" />
+	<import resource="classpath*:/java-store-web-oauth-persistence.xml" />
 
 </beans>

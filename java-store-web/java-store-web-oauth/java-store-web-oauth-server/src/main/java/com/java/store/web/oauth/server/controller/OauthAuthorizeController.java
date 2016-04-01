@@ -14,13 +14,22 @@ import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.message.OAuthResponse;
 import org.apache.oltu.oauth2.common.message.types.ResponseType;
 import org.apache.oltu.oauth2.common.utils.OAuthUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.java.store.web.oauth.server.server.ClientService;
+import com.java.store.web.oauth.server.server.UserService;
 
 /**
  * 
@@ -32,18 +41,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class OauthAuthorizeController {
 
 	private static final Logger LOG = LoggerFactory.getLogger(OauthAuthorizeController.class);
- 
+	
+	@Autowired
+	private ClientService clientService;
+	@Autowired
+	private UserService userService;
+	
 	public OauthAuthorizeController() {
 		System.out.println("OauthAuthorizeController create .......");
 	}
 	
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping("authorize")
-    public Object authorize(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object authorize(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
     	System.out.println("============================================");
         try {
             OAuthAuthzRequest oauthRequest = new OAuthAuthzRequest(request);
+            //检查传入的客户端id是否正确
+//            if (!oAuthService.checkClientId(oauthRequest.getClientId())) {
+//                OAuthResponse resp =
+//                        OAuthASResponse.errorResponse(HttpServletResponse.SC_BAD_REQUEST)
+//                                .setError(OAuthError.TokenResponse.INVALID_CLIENT)
+//                                .setErrorDescription(Constants.INVALID_CLIENT_DESCRIPTION)
+//                                .buildJSONMessage();
+//                return new ResponseEntity(resp.getBody(), HttpStatus.valueOf(resp.getResponseStatus()));
+//            } 
+
+            Subject subject = SecurityUtils.getSubject();
+            //如果用户没有登录，跳转到登陆页面
+            if(!subject.isAuthenticated()) {
+                if(!login(subject, request)) {//登录失败时跳转到登陆页面
+                    model.addAttribute("client", clientService.findByClientId(oauthRequest.getClientId()));
+                    return "login";
+                }
+            }
+
+            String username = (String)subject.getPrincipal();
             //生成授权码
             String authorizationCode = null;
             //responseType目前仅支持CODE，另外还有TOKEN
@@ -85,21 +119,25 @@ public class OauthAuthorizeController {
 
 
     }
+    private boolean login(Subject subject, HttpServletRequest request) {
+        if("get".equalsIgnoreCase(request.getMethod())) {
+            return false;
+        }
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
 
-//    private boolean checkAndHandleAuthHeaderUsed(HttpServletResponse response, OAuthAuthxRequest oauthRequest) throws OAuthSystemException {
-//        if (oauthRequest.isClientAuthHeaderUsed()) {
-//            OAuthResponse oAuthResponse = OAuthResponse.status(HttpServletResponse.SC_FOUND)
-//                    .location(oauthRequest.getRedirectURI())
-//                    .setParam("client_id", oauthRequest.getClientId())
-//                    .buildJSONMessage();
-//
-//            LOG.debug("Auth header used by client: {}, return directly", oauthRequest.getClientId());
-//            WebUtils.writeOAuthJsonResponse(response, oAuthResponse);
-//            return true;
-//        }
-//        return false;
-//    }
-
+        if(StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
+            return false;
+        }
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        try {
+            subject.login(token);
+            return true;
+        } catch (Exception e) {
+            request.setAttribute("error", "登录失败:" + e.getClass().getName());
+            return false;
+        }
+    }
 //    private void unsupportResponseType(OAuthAuthxRequest oauthRequest, HttpServletResponse response) throws OAuthSystemException {
 //        final String responseType = oauthRequest.getResponseType();
 //        LOG.debug("Unsupport response_type '{}' by client_id '{}'", responseType, oauthRequest.getClientId());

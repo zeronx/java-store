@@ -8,7 +8,7 @@
   <artifactId>java-store-web-oauth-server</artifactId>
   <packaging>war</packaging>
   <build>
-	<finalName>java-store-web-springmvc-service</finalName>
+	<finalName>java-store-web-oauth-service</finalName>
   </build>
   <properties>
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -37,6 +37,28 @@
 	<dependency>
 		<groupId>org.springframework</groupId>
 		<artifactId>spring-aop</artifactId>
+	</dependency>
+	<!-- aop -->
+	<dependency>
+		<groupId>org.aspectj</groupId>
+		<artifactId>aspectjrt</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.aspectj</groupId>
+		<artifactId>aspectjweaver</artifactId>
+		<scope>runtime</scope>
+	</dependency>
+	
+	<!-- assertj -->
+	<dependency>
+		<groupId>org.assertj</groupId>
+		<artifactId>assertj-core</artifactId>
+		<scope>test</scope>
+	</dependency>
+	<!-- hibernate4 -->
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-core</artifactId>
 	</dependency>
 	<dependency>
 		<groupId>junit</groupId>
@@ -71,7 +93,10 @@
 		<groupId>org.springframework.data</groupId>
 		<artifactId>spring-data-jpa</artifactId>
 	</dependency>
-	
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-entitymanager</artifactId>
+	</dependency>
 	<dependency>
 		<groupId>org.mybatis</groupId>		
 		<artifactId>mybatis</artifactId>
@@ -86,10 +111,7 @@
 		<artifactId>pagehelper</artifactId>
 	</dependency>
 	
-	<dependency>
-		<groupId>org.hibernate</groupId>
-		<artifactId>hibernate-entitymanager</artifactId>
-	</dependency>
+	
 	<dependency>
 		<groupId>javax.servlet</groupId>
 		<artifactId>javax.servlet-api</artifactId>
@@ -218,12 +240,6 @@
 	</dependency>
 	
 	<!-- =========================================== -->
-        <!-- provided dependency -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
@@ -241,12 +257,19 @@
             <groupId>org.apache.oltu.oauth2</groupId>
             <artifactId>org.apache.oltu.oauth2.authzserver</artifactId>
         </dependency>
-        <!--shiro-->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.shiro</groupId>-->
-        <!--<artifactId>shiro-web</artifactId>-->
-        <!--<version>${shiro.version}</version>-->
-        <!--</dependency>-->
+         <!--shiro-->
+        <dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+		</dependency>
+        <dependency>
+	        <groupId>org.apache.shiro</groupId>
+	        <artifactId>shiro-web</artifactId>
+        </dependency>
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-spring</artifactId>
+		</dependency>
 	<!-- ===========================================  -->
 	
   </dependencies>
