@@ -116,8 +116,6 @@ public class OauthAuthorizeController {
             headers.setLocation(new URI(resp.getLocationUri()));
             return new ResponseEntity(headers, HttpStatus.valueOf(resp.getResponseStatus()));
         }
-
-
     }
     private boolean login(Subject subject, HttpServletRequest request) {
         if("get".equalsIgnoreCase(request.getMethod())) {
@@ -134,6 +132,7 @@ public class OauthAuthorizeController {
             subject.login(token);
             return true;
         } catch (Exception e) {
+        	LOG.error("{}",e);
             request.setAttribute("error", "登录失败:" + e.getClass().getName());
             return false;
         }
