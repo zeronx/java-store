@@ -5,11 +5,5 @@
     <artifactId>java-store-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <artifactId>java-store-java</artifactId>
-  <packaging>pom</packaging>
-  <modules>
-  	<module>java-store-java-socket</module>
-  	<module>java-store-java-file-and-strean</module>
-  	<module>java-store-java-string</module>
-  </modules>
+  <artifactId>java-store-java-string</artifactId>
 </project>

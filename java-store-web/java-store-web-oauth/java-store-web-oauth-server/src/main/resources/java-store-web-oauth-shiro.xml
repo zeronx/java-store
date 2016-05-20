@@ -57,37 +57,33 @@
         <property name="loginUrl" value="/login"/>
     </bean> -->
  <!-- Shiro的Web过滤器 -->
-    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+      <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="/login"/>
+        <property name="loginUrl" value="/views/login.jsp"/>
+        <property name="successUrl" value="/security/success.jsp"/>
+        <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
         <!-- <property name="filters">
             <util:map>
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
             </util:map>
-        </property> -->
+        </property>  --> 
         <property name="filterChainDefinitions">
             <value>
-                / = anon
-                /login = authc
                 /logout = logout
-
-                /authorize=anon
-                /accessToken=anon
-                /userInfo=anon
-
-                /** = anon
+                /authorize = anon
+                /accessToken = anon
+                /security/** = authc
             </value>
         </property>
-    </bean>
+    </bean>  
 	<!-- Shiro的Web过滤器 -->
-    <!-- <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+   <!--  <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="/login"/>
-        <property name="successUrl" value="/index"/>
+        <property name="loginUrl" value="/views/login"/>
+        <property name="successUrl" value="/success"/>
         <property name="unauthorizedUrl" value="/unauthorized"/>
         <property name="filterChainDefinitions">
             <value>
-                /favicon.ico = anon
                 /resources/** = anon
                 /login = anon
                 /unauthorized = anon
@@ -99,9 +95,9 @@
                 #user permissions
                 /user/list = authc, perms["user:list"]
                 /user/create = authc, perms["user:create"]
+                /views/** = anon
                 # everything else requires authentication:
                 /** = authc
-                /** = anon
             </value>
         </property>
     </bean> -->

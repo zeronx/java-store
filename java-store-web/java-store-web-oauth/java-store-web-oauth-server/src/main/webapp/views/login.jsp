@@ -11,7 +11,7 @@
 <div>使用你的Shiro示例Server帐号访问 [${client.clientName}] ，并同时登录Shiro示例Server</div>
 <div class="error">${error}</div>
 
-<form action="" method="post">
+<form action="/oauth2.0/authorize" method="post">
     	<input type="hidden" name="client_id" value="test"/>
         <input type="hidden" name="scope" value="read"/>
         <input type="hidden" name="response_type" value="code"/>
