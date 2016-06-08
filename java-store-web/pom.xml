@@ -9,5 +9,8 @@
   	<module>java-store-web-springmvc</module>
   	<module>java-store-web-rest</module>
   	<module>java-store-web-oauth</module>
+  	<module>java-store-web-jquery</module>
+  	<module>java-store-web-activemq</module>
+  	<module>java-store-web-activemq-server</module>
   </modules>
 </project>

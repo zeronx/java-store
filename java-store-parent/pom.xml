@@ -61,6 +61,8 @@
 		<oltu.version>1.0.0</oltu.version>
 		<shiro.version>1.2.3</shiro.version>
 		<fasterxml.jackson.version>2.5.4</fasterxml.jackson.version>
+		<activemq.version>5.12.0</activemq.version>
+		<activemq.pool.version>5.8.0</activemq.pool.version>
 	</properties>
 
 	<build>
@@ -167,6 +169,8 @@
 	<!-- 
 	Distribution Management
              用于配置分发管理，配置相应的产品发布信息,主要用于发布，在执行mvn deploy后表示要发布的位置
+             配置POM的distributionManagement来指定Maven分发构件的位置
+    mvn install 会将项目生成的构件安装到本地Maven仓库，mvn deploy 用来将项目生成的构件分发到远程Maven仓库。
      -->
 	<distributionManagement>    
 	   <repository>    
@@ -183,7 +187,7 @@
     
     <!-- 配置maven仓库 -->
 	<repositories>
-		<repository>
+	 <!--	<repository>
             <id>local_repo</id>
             <name>dev Nexus Repository</name>
             <url>http://192.168.0.200:8081/nexus/content/groups/public</url>
@@ -191,7 +195,7 @@
 				<enabled>true</enabled>
 			</snapshots>
         </repository>
-       <!--  <repository>  
+        <repository>  
             <id>jboss</id>  
             <name>JBoss Repository</name>  
             <url>http://repository.jboss.com/maven2/</url>  
@@ -212,9 +216,10 @@
 			<url>http://maven.oschina.net/content/groups/public/</url>
 		</repository>
 	</repositories>
+	
 	<!-- 配置Maven从什么地方下载插件构件 -->
 	<pluginRepositories>
-		<pluginRepository>
+		<!--<pluginRepository>
 			<id>local_repo</id>
             <name>dev Nexus Repository</name>
             <url>http://192.168.0.200:8081/nexus/content/groups/public</url>
@@ -224,7 +229,7 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-		</pluginRepository> 
+		</pluginRepository>  -->
 		<pluginRepository>
 			<id>oschina</id>
 			<name>oschina Releases</name>
@@ -238,13 +243,13 @@
 		</pluginRepository>
 	</pluginRepositories>
 
-	<dependencies>
+	 <dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 		</dependency>
-	</dependencies>
+	</dependencies> 
 	<dependencyManagement> <!-- 用于父项目配置共同的依赖关系，主要配置依赖包相同因素 -->
 		<dependencies>
 			<!-- edu-core -->
@@ -784,6 +789,23 @@
 				<version>${spring.data.jpa.version}</version>
 			</dependency>
 
+				
+			<!-- active mq -->
+			<dependency>
+				 <groupId>org.apache.activemq</groupId>
+				 <artifactId>activemq-all</artifactId>
+				 <version>${activemq.version}</version>
+            </dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jms</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+        	<dependency>  
+           	 	<groupId>org.apache.activemq</groupId>  
+           	 	<artifactId>activemq-pool</artifactId>  
+            	<version>${activemq.pool.version}</version>
+        	</dependency>
 			<!-- aop -->
 			<dependency>
 				<groupId>org.aspectj</groupId>
