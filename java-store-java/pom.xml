@@ -12,5 +12,6 @@
   	<module>java-store-java-file-and-strean</module>
   	<module>java-store-java-string</module>
 	<module>java-store-java-hibernate</module>
+	<module>java-store-java-excel</module>
   </modules>
 </project>
