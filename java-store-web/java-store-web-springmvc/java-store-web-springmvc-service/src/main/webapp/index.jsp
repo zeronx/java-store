@@ -8,7 +8,8 @@
 </head>
 <body>
 
-	<a href="get_user_info">Hello World</a>
+	<a href="get_user_info">Hello World</a><br>
+	<a href="get_user_info2">Hello World2</a>
 
 </body>
 </html>
