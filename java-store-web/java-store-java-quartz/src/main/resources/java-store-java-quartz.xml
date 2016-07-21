@@ -23,15 +23,16 @@
 			</list>
 		</property>
 	</bean>
-	<bean id="testTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+	<bean id="testTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
        <property name="jobDetail" ref="testJobDetail"/>  
-       <property name="cronExpression" value="*/1 * * * * ?"/><!-- 每隔1秒钟触发一次 -->  
+       <property name="cronExpression" value="*/1 * * * * ?" /><!-- 每隔1秒钟触发一次 -->  
 	</bean>  
 	<!--  总管理类如果将lazy-init='false'那么容器启动就会执行调度程序   -->  
 	<bean id="testJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">   
         <property name="targetObject" ref="testJob"/>  
-        <property name="targetMethod" value="execute"/>  
-        <property name="concurrent" value="false"/>
+        <property name="targetMethod" value="execute1"/>  
         <!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->  
+        <property name="concurrent" value="false"/>
 	</bean> 
+	<bean id="testJob" class="com.java.store.java.quartz.TestJob"></bean>
 </beans>
