@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:rabbitmq="http://www.core.cn/schema/rabbitmq"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd 
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd 
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+		http://www.core.cn/schema/rabbitmq http://www.core.cn/schema/rabbitmq/spring-rabbitmq.xsd">
+	
+	<context:component-scan base-package="com.java"/>
+    <task:annotation-driven />
+    <!-- 如果你同时执行多个任务，且某些任务耗时较长，要配线程池哦(>_<)
+如题。比如，你设置了12:00触发A任务、12:05触发B任务，如果A任务需耗时10分钟，并且没设置线程池，那么B任务有可能会被推迟到12:10以后再执行哦。
+所以，这些情况，我们需设置线程池 -->
+   <!--  <task:annotation-driven scheduler="myScheduler"/>
+    <task:scheduler id="myScheduler" pool-size="20"/> -->
+</beans>

@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath*:java-store-java-quartz.xml"})
+@ContextConfiguration({"classpath*:java-store-java-quartz-auto.xml"})
 public class TestQuartzJob {
 
 	@Test
