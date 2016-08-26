@@ -12,5 +12,6 @@
   	<module>java-store-web-jquery</module>
   	<module>java-store-web-activemq</module>
   	<module>java-store-web-activemq-server</module>
+  	<module>java-store-java-wx</module>
   </modules>
 </project>
