@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @version v1.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = {"classpath*:java-store-web-dubbo-consumer.xml"})
 @ContextConfiguration(locations = { "classpath*:java-store-web-activemq-server.xml" })
 public class BaseTestTemplate {
 }

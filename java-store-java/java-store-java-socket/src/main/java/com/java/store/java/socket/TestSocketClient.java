@@ -25,7 +25,7 @@ public class TestSocketClient {
 
     public void connect() {
         try {
-            s = new Socket("192.168.133.1", 10083);
+            s = new Socket("127.0.0.1", 10083);
             dos = new DataOutputStream(s.getOutputStream());
             dis = new DataInputStream(s.getInputStream());
         } catch (IOException e) {

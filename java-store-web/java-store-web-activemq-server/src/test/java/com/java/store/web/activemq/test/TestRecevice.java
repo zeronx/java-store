@@ -16,8 +16,8 @@ import com.sun.tools.javac.parser.Scanner;
  */
 public class TestRecevice extends BaseTestTemplate {
 	
-	@Autowired
-	private ReceiveService2 receiveService;
+//	@Autowired
+//	private ReceiveService2 receiveService;
 	
 	@Test
 	public void testReceive() {
@@ -27,6 +27,6 @@ public class TestRecevice extends BaseTestTemplate {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(receiveService);
+//		System.out.println(receiveService);
 	}
 }
