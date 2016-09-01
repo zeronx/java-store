@@ -4,6 +4,7 @@
     <groupId>com.java.store</groupId>
     <artifactId>java-store-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+	<relativePath>../../java-store-parent</relativePath>
   </parent>
   <artifactId>java-store-web-wx</artifactId>
   <packaging>war</packaging>

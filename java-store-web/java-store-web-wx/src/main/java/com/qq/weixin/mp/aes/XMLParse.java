@@ -15,6 +15,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
@@ -44,8 +45,8 @@ class XMLParse {
 			NodeList nodelist1 = root.getElementsByTagName("Encrypt");
 			NodeList nodelist2 = root.getElementsByTagName("ToUserName");
 			result[0] = 0;
-			result[1] = nodelist1.item(0).getNodeValue();
-			result[2] = nodelist2.item(0).getNodeValue();
+			result[1] = ((Node)nodelist1.item(0)).getTextContent();
+			result[2] = ((Node) nodelist2.item(0)).getTextContent();
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();

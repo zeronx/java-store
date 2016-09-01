@@ -245,10 +245,12 @@ public class WXBizMsgCrypt {
 	public String DecryptMsg(String msgSignature, String timeStamp, String nonce, String postData)
 			throws AesException {
 
+		System.out.println("++++++++++++++++===========================");
 		// 密钥，公众账号的app secret
 		// 提取密文
 		Object[] encrypt = XMLParse.extract(postData);
-
+        System.out.println("encypt[1] =============="+ encrypt[1]);
+        System.out.println("encypt[2] =============="+ encrypt[2]);
 		// 验证安全签名
 		String signature = SHA1.getSHA1(token, timeStamp, nonce, encrypt[1].toString());
 

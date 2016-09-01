@@ -8,4 +8,6 @@ public interface CoreService {
 
 	String processGet(String signature, String timestamp, String nonce, String echostr);
 
+	String processPostMsg(String signature, String timestamp, String nonce, String requestData);
+
 }

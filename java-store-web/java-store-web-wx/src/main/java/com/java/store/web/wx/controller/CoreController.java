@@ -1,5 +1,8 @@
 package com.java.store.web.wx.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -7,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.java.store.web.wx.service.CoreService;
-import com.sun.tools.javac.resources.compiler;
+import com.java.store.web.wx.utils.MyHttpUtils;
 
 /**
  * @author zeronx
@@ -24,15 +29,19 @@ public class CoreController {
 	private CoreService coreService;
 	
 	@RequestMapping(value="receive", method=RequestMethod.GET)
-	public String receiveValidator(@RequestParam("msg_signature") String signature, @RequestParam("timestamp") String timestamp, @RequestParam("nonce") String nonce, @RequestParam("echostr") String echostr) {
+	public void receiveValidator(@RequestParam("msg_signature") String signature, @RequestParam("timestamp") String timestamp, @RequestParam("nonce") String nonce, @RequestParam("echostr") String echostr) {
 		String result = coreService.processGet(signature, timestamp, nonce, echostr);
-		return null;
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest(); 
+		HttpServletResponse response = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getResponse();
+ 		MyHttpUtils.writeMsg(request, response, result);
 	}
 	
 	@RequestMapping(value="receive", method=RequestMethod.POST, produces="text/html;charset=UTF-8")
-	@ResponseBody
-	public String receiveMessage(@RequestParam("msg_signature") String signature, @RequestParam("timestamp") String timestamp, @RequestParam("nonce") String nonce, @RequestBody String requestData) {
-		
-		return null;
+	public void receiveMessage(@RequestParam("msg_signature") String signature, @RequestParam("timestamp") String timestamp, @RequestParam("nonce") String nonce, @RequestBody String requestData) {
+		System.out.println("=================requestData = ==========" + requestData);
+		String result = coreService.processPostMsg(signature, timestamp, nonce, requestData);
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest(); 
+		HttpServletResponse response = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getResponse();
+ 		MyHttpUtils.writeMsg(request, response, result);
 	}
 }
